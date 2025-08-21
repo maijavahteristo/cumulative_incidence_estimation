@@ -35,8 +35,8 @@ data[, follow_up_time :=  time_length(difftime(as.Date(cens_pvm), as.Date(date_o
 #performing the cumulative incidence calculation with the tidycmprsk package
 cumulative_incidence_fig <- tidycmprsk::cuminc(Surv(follow_up_time, as.factor(status_cens)) ~ genotype, data) %>%
   ggcuminc() + #plotting the cumulative incidences 
-  facet_wrap(~strata, nrow = 4, axes = "all", axis.labels = "all") 
-xlab("Time (years)") +
+  facet_wrap(~strata, nrow = 4, axes = "all", axis.labels = "all") +
+  xlab("Time (years)") +
   add_confidence_interval() +
   scale_y_continuous(labels = scales::percent) +
   labs(title = "CIN2+ cumulative incidence by HPV genotype") +
@@ -47,3 +47,4 @@ xlab("Time (years)") +
 
 #saving the figure to the working directory
 ggsave("cumulative_incidence_by_genotype.jpg", dpi = 700, width = 8, height = 6)
+
